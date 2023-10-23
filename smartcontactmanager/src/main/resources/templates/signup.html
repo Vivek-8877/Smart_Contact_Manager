@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <label for="password">Your Password</label>
                                 <input type="password" th:classappend="${#fields.hasErrors('*{password}') ? 'is-invalid':''}" class="form-control" id="password" aria-describedby="emailHelp"
-                                    placeholder="Enter Here" name="password" required>
+                                    placeholder="Enter Here" th:value="${user.password}" name="password" required>
                                 <div class="invalid-feedback" th:each="e : ${#fields.errors('*{password}')}" th:text="${e}">
                                 </div>
                             </div>

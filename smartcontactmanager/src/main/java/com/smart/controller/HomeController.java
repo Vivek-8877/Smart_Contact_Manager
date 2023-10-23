@@ -42,18 +42,18 @@ public class HomeController {
 
     @PostMapping("/do_register")
     public String registerUser(@Valid @ModelAttribute("user")User user, BindingResult bindingResult,@RequestParam(value="agreement",defaultValue = "false")boolean agreement,Model model) {
-        System.out.println("Binding Result error printing"+bindingResult.hasErrors());
-        if(bindingResult.hasErrors()) {
-            System.out.println("Their is an error");
-            // System.out.println(bindingResult.toString());
-            // model.addAttribute("user", user);
-            return "signup";
-        }
         try {
-            System.out.println(user);
-            System.out.println(agreement);
+            // System.out.println(user);
+            // System.out.println(agreement);
             if(!agreement) {
                 throw new Exception("You have not agreed the terms and conditions");
+            }
+
+            // System.out.println("Binding Result error printing "+bindingResult.hasErrors());
+            if(bindingResult.hasErrors()) {
+                System.out.println(bindingResult.toString());
+                model.addAttribute("user", user);
+                return "signup";
             }
 
             user.setRole("ROLE_USER");
@@ -62,9 +62,13 @@ public class HomeController {
 
 
             model.addAttribute("user",user);
+            // System.out.println("I am Printing "+this.userRepository.findByEmail(user.getEmail()));
+            if(this.userRepository.findByEmail(user.getEmail()).size()>0) {
+                throw new Exception("You have already registered try different Email");
+            }
 
             User resultUser = this.userRepository.save(user);
-            System.out.println(resultUser);
+            // System.out.println(resultUser);
 
             model.addAttribute("user",new User());
             model.addAttribute("message", new Message("You Successfully Registered !!","Thanks","alert-success"));
