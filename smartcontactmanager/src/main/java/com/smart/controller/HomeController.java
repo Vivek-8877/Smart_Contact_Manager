@@ -67,7 +67,7 @@ public class HomeController {
                 throw new Exception("You have already registered try different Email");
             }
 
-            User resultUser = this.userRepository.save(user);
+            this.userRepository.save(user);
             // System.out.println(resultUser);
 
             model.addAttribute("user",new User());
