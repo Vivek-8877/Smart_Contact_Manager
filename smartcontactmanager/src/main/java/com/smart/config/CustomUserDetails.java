@@ -35,7 +35,8 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        throw new UnsupportedOperationException("Unimplemented method 'isAccountNonExpired'");
+        // throw new UnsupportedOperationException("Unimplemented method isAccountNonExpired");
+        return true;
     }
 
     @Override

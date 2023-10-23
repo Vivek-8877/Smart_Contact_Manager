@@ -33,9 +33,9 @@ public class User {
     @Email(message = "Enter Valid Email")
     private String email;
 
-    @Size(min = 6, max = 30, message = "Password must be between 6 and 30 characters")
+    @Size(min = 6, message = "Password size must be greater then 5 charcaters")
     @NotBlank(message = "Password is required")
-    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).*$", message = "Password must Contains Atleast 1-upperCase,1-lowerCase,1-Special Character")
+    // @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).*$", message = "Password must Contains Atleast 1-upperCase,1-lowerCase,1-Special Character")
     private String password;
 
     private String role;

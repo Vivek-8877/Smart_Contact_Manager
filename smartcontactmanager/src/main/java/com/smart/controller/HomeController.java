@@ -73,8 +73,10 @@ public class HomeController {
 
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
-            this.userRepository.save(user);
+            // this.userRepository.save(user);
             // System.out.println(resultUser);
+            System.out.println(user);
+            this.userRepository.save(user);
 
             model.addAttribute("user",new User());
             model.addAttribute("message", new Message("You Successfully Registered !!","Thanks","alert-success"));
