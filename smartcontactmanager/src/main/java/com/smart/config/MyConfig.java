@@ -8,8 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
 import static org.springframework.security.config.Customizer.withDefaults;
+
 
 @Configuration
 @EnableWebSecurity
@@ -35,21 +35,32 @@ public class MyConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/user/**").hasRole("USER")
-                .requestMatchers("/**").permitAll().and().formLogin(withDefaults()).csrf(csrf -> csrf.disable());
+        http.authorizeHttpRequests((authorizeHttpRequests) ->
+                authorizeHttpRequests
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/**").permitAll()
+                        )
+                        // .formLogin(withDefaults());
+                        .formLogin(formLogin -> formLogin
+                                        .loginPage("/signin")
+                                        .loginProcessingUrl("/dologin")
+                                        .defaultSuccessUrl("/user/index")
+                                        .permitAll()
+                        )
+                        .logout(withDefaults()
+                        // .logout(logout -> logout
+                        // .logoutUrl("/signin")
+                        // .logoutSuccessUrl("/signin")
+                        // .deleteCookies("remember-me")
+                        );
+        // http.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN")
+        //         .requestMatchers("/user/**").hasRole("USER")
+        //         .requestMatchers("/**").permitAll().and().formLogin(withDefaults()).csrf(csrf -> csrf.disable());
         // http.csrf().disable().authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN")
         //     .requestMatchers("/user/**").hasRole("USER")
         //     .requestMatchers("/**").permitAll().and().formLogin();
         return http.build();
     }
-
-    // @Override
-    // protected void configure(HttpSecurity http) throws Exception {
-    //     http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
-    //     .antMatchers("/user/**").hasRole("USER")
-    //     .antMatchers("/**").permitAll().and().formLogin().and().csrf().disable();
-    // }
-
     
 }

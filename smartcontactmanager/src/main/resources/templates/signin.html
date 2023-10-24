@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">This is home Page</title>
+</head>
+<body>
+    <section>
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="my-card mt-4">
+
+                        <div class="card-header">
+                            <div class="text-center">
+                                <img style="width: 60px;" th:src="@{/img/contract.png}" alt="">
+                            </div>
+                            
+                            <h1 class="text-center">LogIn Here !!</h1>
+
+                            <div th:if="${param.error}"
+                                class="alert alert-danger alert-dismissible fade show">
+                                <strong>Sorry !! </strong>Invalid Credantials
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div th:if="${param.Logout}"
+                                class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    You have been LogOut
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <form id="Login-form" class="form" th:action="@{/dologin}" method="post">
+
+                            <div class="card-body">
+                                <!-- User Name -->
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="username" aria-describedby="emailHelp"
+                                    placeholder="Enter here" name="username">
+                                </div>
+    
+                                <!-- password -->
+    
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                    placeholder="Enter here" name="password">
+                                </div>
+    
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                                </div>
+
+                                <button type="submit" class="btn btn-block btn-success">Login</button>
+                            </div>
+                            
+
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-center links">
+                                    Don't have an account?<a th:href="@{/signup}"> Sign Up</a>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <a href="#">Forgot your password?</a>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

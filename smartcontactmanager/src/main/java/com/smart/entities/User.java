@@ -44,7 +44,7 @@ public class User {
     @Column(length = 500)
     private String about;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")   // cascade use to save update
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")   // cascade use to save update
     private List<Contact> contacts = new ArrayList<>();
 
 
