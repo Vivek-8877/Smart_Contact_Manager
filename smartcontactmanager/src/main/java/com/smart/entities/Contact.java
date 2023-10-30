@@ -36,6 +36,12 @@ public class Contact {
     public void setId(int id) {
         this.id = id;
     }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
     public String getFirstName() {
         return firstName;
     }
@@ -78,6 +84,12 @@ public class Contact {
     public void setDescription(String description) {
         this.description = description;
     }
-
+    // @Override
+    // public String toString() {
+    //     return "Contact [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", work=" + work
+    //             + ", email=" + email + ", phone=" + phone + ", imageUrl=" + imageUrl + ", description=" + description
+    //             + ", user=" + user + "]";
+    // }
+    
     
 }
