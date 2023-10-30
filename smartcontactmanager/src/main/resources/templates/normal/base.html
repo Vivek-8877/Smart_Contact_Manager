@@ -14,7 +14,7 @@
   </head>
   <body>
     <!-- Start of Nav Bar -->
-    <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" th:href="@{/}" href="#">Smart Contact Manager</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -53,10 +53,10 @@
 
 
       <!-- Start of Side Bar -->
-      <div style="margin-top: -10px" class="sidebar">
-        <div class="crossbtn">
+      <div class="sidebar mt-2">
+        <span class="crossbtn">
             <i onclick="toggleSidebar()" class="fa-solid fa-xmark fa-beat-fade fa-xl" style="color: #511f1f"></i>
-        </div>
+        </span>
         <a th:href="@{/user/index}"> <i class="fas fa-home fa-beat"></i> Home</a>
         <a th:href="@{#}"> <i class="fas fa-id-card-alt fa-beat"></i> Show Contacts</a>
         <a th:href="@{/user/add_contact}"> <i class="fas fa-pencil-alt fa-beat"></i> Add Contact</a>
@@ -72,8 +72,8 @@
 
     <!-- Start of content -->
 
-    <div style="margin-top: 5%;" class="content">
-        <i onclick="toggleSidebar()" class="fa-solid fa-bars fa-beat-fade fa-2xl"
+    <div class="content mt-5">
+        <i onclick="toggleSidebar()" class="fa-solid fa-bars fa-beat-fade fa-2xl m-4"
             style=" color: #511f1f; cursor: pointer;"></i>
         <div th:replace="${content}"></div>
     </div>
