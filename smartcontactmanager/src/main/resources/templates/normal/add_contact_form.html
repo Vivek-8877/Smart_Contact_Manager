@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="~{normal/base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">This is home Page</title>
+</head>
+<body>
+    <section>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+
+                        <form 
+                            th:object="${contact}"
+                            enctype="multipart/form-data"
+                            th:action="@{/user/process_contact}"
+                            method="post"
+                        >
+
+                            <div class="card-header text-center">
+                                <h1>Add Contact !!</h1>
+                            </div>
+
+                            <div class="card-body">
+
+                                <!-- First Name -->
+
+                                <div class="form-group mb-3">
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" id="validatedInputGroupPrepend">
+                                            <i class="fa-regular fa-user fa-xl"></i>
+                                        </span>
+                                      </div>
+                                      <input type="text" class="form-control" aria-describedby="validatedInputGroupPrepend"
+                                        id="firstName" name="firstName" placeholder="Enter First Name Here" required>
+                                    </div>
+                                    <!-- <div class="invalid-feedback">
+                                      Example invalid input group feedback
+                                    </div> -->
+                                </div>
+
+
+                                <!-- Last Name -->
+
+                                <div class="form-group mb-3">
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" id="validatedInputGroupPrepend1">
+                                            <i class="fas fa-user fa-xl"></i>
+                                        </span>
+                                      </div>
+                                      <input type="text" class="form-control" aria-describedby="validatedInputGroupPrepend1"
+                                      id="lastName" name="lastName" placeholder="Enter Last Name Here">
+                                    </div>
+                                    <!-- <div class="invalid-feedback">
+                                      Example invalid input group feedback
+                                    </div> -->
+                                </div>
+
+                                <!-- Phone Number -->
+
+                                <div class="form-group mb-3">
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" id="validatedInputGroupPrepend2">
+                                            <i class="fa-solid fa-phone fa-xl"></i>
+                                        </span>
+                                      </div>
+                                      <input type="number" class="form-control" aria-describedby="validatedInputGroupPrepend2"
+                                      id="phone" name="phone" placeholder="Enter Phone Number Here" required>
+                                    </div>
+                                    <!-- <div class="invalid-feedback">
+                                      Example invalid input group feedback
+                                    </div> -->
+                                </div>
+
+                                <!-- Email -->
+
+                                <div class="form-group mb-3">
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" id="validatedInputGroupPrepend3">
+                                            <i class="fa-solid fa-envelope fa-xl"></i>
+                                        </span>
+                                      </div>
+                                      <input type="email" class="form-control" aria-describedby="validatedInputGroupPrepend3"
+                                      id="email" name="email" placeholder="Enter Email Here" required>
+                                    </div>
+                                    <!-- <div class="invalid-feedback">
+                                      Example invalid input group feedback
+                                    </div> -->
+                                </div>
+
+                                <!-- Work -->
+
+                                <div class="form-group mb-3">
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" id="validatedInputGroupPrepend4">
+                                            <i class="fa-solid fa-briefcase fa-xl"></i>
+                                        </span>
+                                      </div>
+                                      <input type="text" class="form-control" aria-describedby="validatedInputGroupPrepend4"
+                                      id="work" name="work" placeholder="Enter Work Here" required>
+                                    </div>
+                                    <!-- <div class="invalid-feedback">
+                                      Example invalid input group feedback
+                                    </div> -->
+                                </div>
+
+                                <!-- Contact Descriptions -->
+
+                                <div class="form-group mb-3">
+                                    <textarea placeholder="Enter contact description" name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
+                                </div>
+
+
+
+
+
+                            </div>
+                            <div class="card-footer">
+                                <h1>I am fotter</h1>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

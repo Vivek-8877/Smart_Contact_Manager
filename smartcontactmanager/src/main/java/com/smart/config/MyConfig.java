@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import static org.springframework.security.config.Customizer.withDefaults;
+// import static org.springframework.security.config.Customizer.withDefaults;
 
 
 @Configuration
@@ -40,20 +40,20 @@ public class MyConfig {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasRole("USER")
                         .requestMatchers("/**").permitAll()
-                        )
-                        // .formLogin(withDefaults());
-                        .formLogin(formLogin -> formLogin
-                                        .loginPage("/signin")
-                                        .loginProcessingUrl("/dologin")
-                                        .defaultSuccessUrl("/user/index")
-                                        .permitAll()
-                        )
-                        .logout(withDefaults()
+        )
+                // .formLogin(withDefaults());
+                .formLogin(formLogin -> formLogin
+                                .loginPage("/signin")
+                                .loginProcessingUrl("/dologin")
+                                .defaultSuccessUrl("/user/index")
+                                .permitAll()
+                ).csrf(csrf -> csrf.disable());
+                        // .logout(withDefaults()
                         // .logout(logout -> logout
-                        // .logoutUrl("/signin")
+                        // .logoutUrl("/logout")
                         // .logoutSuccessUrl("/signin")
                         // .deleteCookies("remember-me")
-                        );
+                        
         // http.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN")
         //         .requestMatchers("/user/**").hasRole("USER")
         //         .requestMatchers("/**").permitAll().and().formLogin(withDefaults()).csrf(csrf -> csrf.disable());

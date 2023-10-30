@@ -95,9 +95,10 @@ public class HomeController {
         return "signin";
     }
 
-    @RequestMapping("/logout")
-    public String customerLogout(Model model) {
-        return "signin";
-    }
+    // @GetMapping("/logout")
+    // public String customerLogout(Model model) {
+    //     System.out.println("Logout runed...");
+    //     return "signin";
+    // }
 
 }
