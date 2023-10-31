@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.smart.dao.UserRepository;
 import com.smart.entities.Contact;
 import com.smart.entities.User;
+import com.smart.helper.Message;
 
 @Controller
 @RequestMapping("/user")
@@ -54,7 +55,7 @@ public class UserController {
 
     // process add contact
     @PostMapping("/process_contact")
-    public String processContact(@ModelAttribute Contact contact,@RequestParam("profileImage") MultipartFile multipartFile,Principal principal) {
+    public String processContact(@ModelAttribute Contact contact,@RequestParam("profileImage") MultipartFile multipartFile,Principal principal,Model model) {
         // System.out.println("Adding Contact....");
         // System.out.println(contact);
         try {
@@ -64,24 +65,30 @@ public class UserController {
             if(multipartFile.isEmpty()) {
                 System.out.println("Image File is Empty");
             } else {
-                String newName = "IMG-" + System.currentTimeMillis() + "." + multipartFile.getContentType();
+                // String extension = Files.
+                String newName = "IMG-" + System.currentTimeMillis() + "." + multipartFile.getContentType().split("/")[1];
                 contact.setImageUrl(newName);
 
+                System.out.println(newName);
                 File saveFile = new ClassPathResource("static/img").getFile();
                 Path path = Paths.get(saveFile.getAbsolutePath()+File.separator+newName);
                 Files.copy(multipartFile.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
 
-                System.out.println("Image is Uploaded");
-
+                // System.out.println("Image is Uploaded");
+                
             }
-
+            
             contact.setUser(user);
             user.getContacts().add(contact);
             this.userRepository.save(user);
-    
+            
+            model.addAttribute("message", new Message("Added Successfully !! Add More.....",contact.getFirstName()+" "+contact.getLastName(),"alert-success"));
+            // model.addAttribute("message", new Message("Added Successfully", "success", "Congrat"));
             // System.out.println("Added to DataBase");
+
         } catch (Exception e) {
             System.out.println("Error :- "+e.getMessage());
+            model.addAttribute("message", new Message("Something Error !! Try Again.....","Sorry","alert-danger"));
         }
 
         return "normal/add_contact_form";

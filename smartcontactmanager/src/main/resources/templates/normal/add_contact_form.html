@@ -21,6 +21,14 @@
 
                             <div class="card-header text-center">
                                 <h1>Add Contact !!</h1>
+                                <div th:if="${message}"
+                                    class="alert alert-dismissible fade show" th:classappend="${message.type}" role="alert">
+                                      <strong th:text="${message.greet}+' !! '"></strong>
+                                      <span th:text="${message.content}"></span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                             </div>
 
                             <div class="card-body">
@@ -120,8 +128,11 @@
                                 <!-- Contact Descriptions -->
 
                                 <div class="form-group mt-3">
-                                    <textarea placeholder="Enter contact description" name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
+                                    <textarea placeholder="Enter contact description" name="description" id="mytextarea" class="form-control" cols="30" rows="10"></textarea>
                                 </div>
+
+                                <!-- Add Contact Button -->
+
                                 <div class="container text-center">
                                   <button type="submit" class="btn btn-outline-warning">Add Contact</button>
                                 </div>
@@ -132,6 +143,13 @@
                 </div>
             </div>
         </div>
+
+        <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+          tinymce.init({
+            selector: '#mytextarea'
+          });
+        </script>
     </section>
 </body>
 </html>
