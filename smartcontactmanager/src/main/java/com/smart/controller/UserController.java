@@ -9,10 +9,10 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -118,12 +118,11 @@ public class UserController {
         // 2nd Ways
         String userName = principal.getName();
         User user = this.userRepository.getUserByUserName(userName);
-        Pageable pageable = new Pageable();
-        pageable.setMaxPageSize(5);
-        Page<Contact> contacts = this.contactRepository.findContactsByUser(user.getId(),pageable);
-        // contacts.sort(Comparator.comparing());
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Contact> contacts = contactRepository.findContactsByUser(user.getId(), pageable);
         model.addAttribute("contacts", contacts);
-
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", contacts.getTotalPages());
 
         return "normal/show_contacts";
     }
