@@ -14,12 +14,11 @@ public class Contact {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true)
     private int id;
     private String firstName;
     private String lastName;
     private String work;
-
-    @Column(unique = true)
     private String email;
     private String phone;
     private String imageUrl;

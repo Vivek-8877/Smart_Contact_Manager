@@ -6,18 +6,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.smart.dao.ContactRepository;
 import com.smart.dao.UserRepository;
 import com.smart.entities.Contact;
 import com.smart.entities.User;
@@ -29,6 +35,9 @@ public class UserController {
     
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ContactRepository contactRepository;
 
     // method for adding common data to response
     @ModelAttribute
@@ -92,6 +101,31 @@ public class UserController {
         }
 
         return "normal/add_contact_form";
+    }
+
+
+    // Show Contacts
+    @GetMapping("/show_contacts/{pageNumber}")
+    public String viewContacts(@PathVariable("pageNumber") Integer pageNumber ,Model model,Principal principal) {
+        model.addAttribute("title", "Show User Contacts");
+        Integer pageSize = 5;  // per page number of contacts
+        // 1st Ways
+
+        // String userName = principal.getName();
+        // User user = this.userRepository.getUserByUserName(userName);
+        // List<Contact> contacts = user.getContacts();
+
+        // 2nd Ways
+        String userName = principal.getName();
+        User user = this.userRepository.getUserByUserName(userName);
+        Pageable pageable = new Pageable();
+        pageable.setMaxPageSize(5);
+        Page<Contact> contacts = this.contactRepository.findContactsByUser(user.getId(),pageable);
+        // contacts.sort(Comparator.comparing());
+        model.addAttribute("contacts", contacts);
+
+
+        return "normal/show_contacts";
     }
 
 }
