@@ -9,49 +9,51 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-md-11 ml-5">
+                <div class="col-md-11 ml-md-5">
                     <div class="card">
                         <div class="card-header text-center">
                             <h1>Your Contacts List</h1>
                         </div>
+                        
             
                         <div class="card-body">
-
-                            <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">#ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Phone</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Action</th>
-                                  </tr>
-                                </thead>
-
-                                <tbody>
-                                  <tr th:each="c : ${contacts}">
-                                    <th th:text="'SCM'+${c.id}" scope="row"></th>
-                                    <td>
-                                        <img class="my_profile_picture rounded-circle" th:src="@{'/img/'+${c.imageUrl}}" alt="profile photo">
-                                        <span th:text="${c.firstName}+' '+${c.lastName}"></span>
-                                    </td>
-                                    <td th:text="${c.phone}"></td>
-
-                                    <td>
-                                        <a th:href="@{'/user/'+${c.id}+'/contact'}">
-                                            <span th:text="${c.email}"></span>
-                                        </a>
-                                    </td>
-
-                                    <td>
-                                        <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                        <button class="btn btn-warning btn-sm">Update</button>
-                                        <button th:href="@{'/user/'+${c.id}+'/contact'}" type="button" class="btn btn-success btn-sm">View</button>
-                                    </td>
-
-                                  </tr>
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">#ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Action</th>
+                                      </tr>
+                                    </thead>
+    
+                                    <tbody>
+                                      <tr th:each="c : ${contacts}">
+                                        <th th:text="'SCM'+${c.id}" scope="row"></th>
+                                        <td>
+                                            <img class="my_profile_picture rounded-circle" th:src="@{'/img/'+${c.imageUrl}}" alt="profile photo">
+                                            <span th:text="${c.firstName}+' '+${c.lastName}"></span>
+                                        </td>
+                                        <td th:text="${c.phone}"></td>
+    
+                                        <td>
+                                            <a th:href="@{'/user/'+${c.id}+'/contact'}">
+                                                <span th:text="${c.email}"></span>
+                                            </a>
+                                        </td>
+    
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                            <button class="btn btn-warning btn-sm">Update</button>
+                                            <button th:href="@{'/user/'+${c.id}+'/contact'}" type="button" class="btn btn-success btn-sm">View</button>
+                                        </td>
+    
+                                      </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
                             <h3 th:if="${totalPages==0}" class="text-center"><a th:href="@{/user/add_contact}"> <i class="fas fa-pencil-alt fa-beat"></i> Click Here to Add Contact to View</a></h3>
                         </div>
