@@ -12,6 +12,15 @@
                 <div class="col-md-11 ml-md-5">
                     <div class="card">
                         <div class="card-header text-center">
+                            <!-- Show Message -->
+                            <div th:if="${message}"
+                                class="alert alert-dismissible fade show" th:classappend="${message.type}" role="alert">
+                                <strong th:text="${message.greet}+' !! '"></strong>
+                                <span th:text="${message.content}"></span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <h1>Your Contacts List</h1>
                         </div>
                         
@@ -33,23 +42,24 @@
                                       <tr th:each="c : ${contacts}">
                                         <th th:text="'SCM'+${c.id}" scope="row"></th>
                                         <td>
-                                            <img class="my_profile_picture rounded-circle" th:src="@{'/img/'+${c.imageUrl}}" alt="profile photo">
+                                            <img class="my_profile_picture rounded-circle" th:src="@{${c.imageUrl}==null ? '/img/profile.png' : '/img/'+${c.imageUrl}}" alt="profile photo">
                                             <span th:text="${c.firstName}+' '+${c.lastName}"></span>
                                         </td>
                                         <td th:text="${c.phone}"></td>
     
                                         <td>
-                                            <a th:href="@{'/user/'+${c.id}+'/contact'}">
+                                            <a th:href="@{'/user/'+${c.id}+'/contact/'+${currentPage}}">
                                                 <span th:text="${c.email}"></span>
                                             </a>
                                         </td>
     
                                         <td>
-                                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                            <button class="btn btn-warning btn-sm">Update</button>
-                                            <button th:href="@{'/user/'+${c.id}+'/contact'}" type="button" class="btn btn-success btn-sm">View</button>
+                                            <form method="post" th:action="@{'/user/process_update_contact/'+${c.id}}">
+                                                <a th:onclick="|deleteContact(${c.id})|" type="button" class="btn btn-danger btn-sm">Delete</a>
+                                                <button type="submit" class="btn btn-warning btn-sm">Update</button>
+                                                <a th:href="@{'/user/'+${c.id}+'/contact/'+${currentPage}}" type="button" class="btn btn-success btn-sm">View</a>
+                                            </form>
                                         </td>
-    
                                       </tr>
                                     </tbody>
                                 </table>

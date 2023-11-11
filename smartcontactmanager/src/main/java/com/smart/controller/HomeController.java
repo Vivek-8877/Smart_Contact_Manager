@@ -63,8 +63,6 @@ public class HomeController {
 
             user.setRole("ROLE_USER");
             user.setEnabled(true);
-            user.setImageUrl("default.png");
-
 
             model.addAttribute("user",user);
             // System.out.println("I am Printing "+this.userRepository.findByEmail(user.getEmail()));
@@ -76,7 +74,7 @@ public class HomeController {
 
             // this.userRepository.save(user);
             // System.out.println(resultUser);
-            System.out.println(user);
+            // System.out.println(user);
             this.userRepository.save(user);
 
             model.addAttribute("user",new User());

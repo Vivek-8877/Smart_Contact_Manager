@@ -44,10 +44,11 @@ public class User {
     @Column(length = 500)
     private String about;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")   // cascade use to save update
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user",orphanRemoval = true)   // cascade use to save update
     private List<Contact> contacts = new ArrayList<>();
 
 
+    
     public int getId() {
         return id;
     }
@@ -59,15 +60,15 @@ public class User {
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public String getEmail() {
         return email;
     }
-
+    
     public void setEmail(String email) {
         this.email = email;
     }
@@ -75,15 +76,15 @@ public class User {
     public String getPassword() {
         return password;
     }
-
+    
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
     public String getRole() {
         return role;
     }
-
+    
     public void setRole(String role) {
         this.role = role;
     }
@@ -95,7 +96,7 @@ public class User {
     public void setEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
     }
-
+    
     public String getImageUrl() {
         return imageUrl;
     }
@@ -103,11 +104,11 @@ public class User {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
+    
     public String getAbout() {
         return about;
     }
-
+    
     public void setAbout(String about) {
         this.about = about;
     }
@@ -119,14 +120,13 @@ public class User {
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
     }
-
+    
     @Override
     public String toString() {
         return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-                + ", isEnabled=" + isEnabled + ", imageUrl=" + imageUrl + ", about=" + about + ", contacts=" + contacts
+        + ", isEnabled=" + isEnabled + ", imageUrl=" + imageUrl + ", about=" + about + ", contacts=" + contacts
                 + "]";
     }
-
     
     
 }

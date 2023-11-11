@@ -8,7 +8,19 @@
 <body>
     <section>
 
-        <h1>I am user dashboard</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img style="height: 200px; width: 200px;" src="/img/profile.png" alt="">
+                            <h1 class="mt-3 text-secondary font-weight-light font-italic">Start Adding Your Contact On Cloud....</h1>
+                            <a th:href="@{/user/add_contact}" class="btn btn-primary mt-4 btn-block text-uppercase"> <i class="fas fa-pencil-alt fa-beat"></i> Add New contact </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </section>
 </body>

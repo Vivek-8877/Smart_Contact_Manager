@@ -89,6 +89,11 @@ public class Contact {
     //             + ", email=" + email + ", phone=" + phone + ", imageUrl=" + imageUrl + ", description=" + description
     //             + ", user=" + user + "]";
     // }
-    
+
+    @Override
+    public boolean equals(Object contact) {
+        return ((Contact) contact).getId()==this.getId();
+    }
+
     
 }
